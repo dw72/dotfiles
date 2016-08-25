@@ -26,6 +26,7 @@ setopt LOCAL_OPTIONS
 setopt LOCAL_TRAPS
 #setopt IGNORE_EOF
 setopt PROMPT_SUBST
+setopt NO_MONITOR
 
 # pushd
 setopt AUTO_PUSHD
