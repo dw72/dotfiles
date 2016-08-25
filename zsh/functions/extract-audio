@@ -1,0 +1,6 @@
+if [ ! -f $1 ]
+then
+  echo "Podany plik nie istnieje"
+else
+  ffmpeg -i "${1}" -vn -y "${1%.*}.mp3";
+fi

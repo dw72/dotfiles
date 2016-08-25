@@ -1,0 +1,63 @@
+DOTFILES=$HOME/.dotfiles
+ZSH=$DOTFILES/zsh
+
+export TERM="xterm-256color"
+
+# ZPlug
+#-------------
+ZPLUG_HOME=$HOME/.zplug
+[[ -d ~/.zplug ]] || {
+  mkdir -p $ZPLUG_HOME
+  git clone https://github.com/zplug/zplug $ZPLUG_HOME
+  source $ZPLUG_HOME/init.zsh && zplug update --self
+}
+source $ZPLUG_HOME/init.zsh
+
+ZPLUG_LOADFILE="$ZSH/zplug.packages.list"
+
+# Install plugins that have not been installed yet
+if ! zplug check --verbose; then
+  zplug install
+fi
+
+zplug load
+
+# source all .zsh files inside of the zsh/ subdirectory
+for config ($ZSH/**/*.zsh) source $config
+
+if zplug check bhilburn/powerlevel9k; then
+  DEFAULT_USER=${USER}
+  # POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_ccontext dir vcs)
+  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status nvm time)
+  POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+  POWERLEVEL9K_CUSTOM_CCONTEXT="hostname"
+  POWERLEVEL9K_CUSTOM_CCONTEXT_BACKGROUND="238"
+  POWERLEVEL9K_CUSTOM_CCONTEXT_FOREGROUND="252"
+  POWERLEVEL9K_DIR_BACKGROUND='238'
+  POWERLEVEL9K_DIR_FOREGROUND='252'
+  POWERLEVEL9K_STATUS_BACKGROUND='238'
+  POWERLEVEL9K_STATUS_FOREGROUND='252'
+  POWERLEVEL9K_CONTEXT_BACKGROUND='240'
+  POWERLEVEL9K_CONTEXT_FOREGROUND='252'
+  POWERLEVEL9K_TIME_BACKGROUND='238'
+  POWERLEVEL9K_TIME_FOREGROUND='252'
+  POWERLEVEL9K_NVM_BACKGROUND='240'
+  POWERLEVEL9K_NVM_FOREGROUND='252'
+  POWERLEVEL9K_HISTORY_BACKGROUND='240'
+  POWERLEVEL9K_HISTORY_FOREGROUND='252'
+fi
+
+if zplug check zsh-users/zsh-history-substring-search; then
+  # Add history-substring-search-* widgets to list of widgets that clear the autosuggestion
+  ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down)
+fi
+
+if zplug check zsh-users/zsh-autosuggestions; then
+  bindkey '^ ' autosuggest-accept
+fi
+
+if zplug check Tarrasch/zsh-autoenv; then
+  AUTOENV_FILE_ENTER=.env
+  AUTOENV_FILE_LEAVE=.envl
+fi

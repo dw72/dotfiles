@@ -1,0 +1,117 @@
+#!/bin/bash
+
+cmd="cp"
+srcdir=.
+dstdir=/mnt/dane/Work/Wyniki
+
+function usage {
+    echo -e "Składnia: `basename $0` -k <klasa> -m <maska> [OPCJA]\n"
+    echo -e "Skrypt zbierający pliki wynikowe pasujące do podanej maski z katalogów z wynikami pracy uczniów\n"
+    # echo "Argumenty wywołania:"
+    echo -e "\t -k <klasa>\t\t klasa której projekty zbieramy"
+    echo -e "\t -m <maska>\t\t wzorzec nazwy plików projektu\n"
+    echo -e "\tOPCJE:"
+    echo -e "\t -s <katalog>\t\t katalog w którym znajdują się katalogi uczniów"
+    echo -e "\t -d <katalog>\t\t katalog do którego skopiować pliki"
+    echo -e "\t -p <podkatalog>\t podkatalog projektu w katalogu docelowym"
+    echo -e "\t -r\t\t\t Zmień nazwę pliku na taką jak podana maska (bez *)"
+    echo -e "\t -n <nazwa>\t\t zmień nazwę pliku na podaną"
+    echo -e "\t -u\t\t\t usuń pliki źródłowe\n"
+    echo -e "\t -t\t\t\t Uruchomienie testowe bez podejmowania działań (tylko pokaż operacje)"
+    echo -e "\n\tUWAGA: Skrypt nie zmienia rozszerzeń plików pozostają orginalne\n"
+    exit
+}
+
+function error() {
+    echo -e "\nERROR: $1\n" > /dev/stderr
+    exit 1
+}
+
+function checkarg() {
+    if [[ $2 == -* ]]; then error "Opcja -$1 wymaga podania argumentu." >&2; fi
+}
+
+# Parsuj argumenty
+while getopts ":d:k:m:rp:n:s:ut" option; do
+    case ${option} in
+        d)
+            checkarg ${option} ${OPTARG}
+            dst=${OPTARG}
+        ;;
+        k)
+            checkarg ${option} ${OPTARG}
+            class=${OPTARG}
+        ;;
+        m)
+            checkarg ${option} ${OPTARG}
+            maskname=${OPTARG%.*}
+            maskext=${OPTARG##*.}
+            if [[ $maskname == $maskext ]]; then maskext="*"; fi
+            fname="-${maskname//\*}"
+        ;;
+        p)
+            checkarg ${option} ${OPTARG}
+            subdir=${OPTARG}
+        ;;
+        r)
+            rename=true
+        ;;
+        n)
+            checkarg ${option} ${OPTARG}
+            fname="-${OPTARG}"
+            rename=true
+        ;;
+        s)
+            checkarg ${option} ${OPTARG}
+            srcdir=${OPTARG}
+        ;;
+        u)
+            cmd="mv"
+        ;;
+        t)
+            testing=true
+        ;;
+        :)
+            error "Opcja -$OPTARG wymaga podania argumentu." >&2
+        ;;
+        \?)
+            echo -e "\nERROR: Nie ma takiej opcji: -$OPTARG\n" >&2
+            usage
+            exit 1
+        ;;
+        *)
+            break
+        ;;
+    esac
+done;
+shift $(($OPTIND - 1))
+
+# Sprawdź czy są wymagane opcje
+if [[ -z $class || -z $maskname ]]; then usage; fi
+
+# Buduj ścieżkę katalogu docelowego
+if [[ -n $dst ]]; then dstdir=$dst; fi
+if [[ -n class ]]; then dstdir=$dstdir/$class; fi
+if [[ -n $subdir ]]; then dstdir=$dstdir/$subdir; fi
+
+# Starujemy
+echo -e "Szukam plików $maskname.$maskext w katalogu: $srcdir ...\n"
+if [[ $testing ]]; then echo -e "URUCHOMIENIE TESTOWE...\n"; fi;
+
+# Utwórz katalog docelowy jeśli trzeba
+if [[ ! $testing && ! -d $dstdir ]]; then
+    echo -e "Tworzę katalog docelowy: $dstdir\n"
+    mkdir -p $dstdir 2>/dev/null
+    if [[ $? -ne 0 ]]; then error "Nie można utworzyć katalogu docelowego"; fi
+fi
+
+# Wyszukaj i kopiuj/przenieś pliki
+counter=$(find $srcdir/$class* -type f -iname "$maskname.$maskext" -print | \
+while read name; do \
+    user=$(echo ${name/$srcdir\//} | cut -f1 -d'/'); \
+    new=$(if [[ $rename ]]; then echo ${user/$class./}$fname.${name##*.}; else echo ${user/$class./}-${name##*/}; fi); \
+    echo "$cmd: ${name} -> $new"; \
+    if [[ ! $testing ]]; then $cmd -f "$name" "$dstdir/$new"; fi; \
+done | tee /dev/stderr | wc -l)
+
+echo -e "\nSkopiowano $counter plik(ów) do katalogu: $dstdir\n\n"
