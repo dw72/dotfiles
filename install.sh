@@ -14,5 +14,5 @@ if [[ -f $HOME/.zshrc ]]; then
 fi
 
 # link new dot files
-ln ~/.dotfiles/git/gitconfig ~/.gitconfig
-ln ~/.dotfiles/zsh/zshrc ~/.zshrc
+ln -s ~/.dotfiles/git/gitconfig ~/.gitconfig
+ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc
