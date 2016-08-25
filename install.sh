@@ -6,8 +6,12 @@ if [ ! "$SHELL" = "/bin/zsh" ]; then
 fi
 
 # remove old dot files
-rm ~/.gitconfig
-rm ~/.zshrc
+if [[ -f $HOME/.gitconfig ]]; then
+  rm ~/.gitconfig
+fi
+if [[ -f $HOME/.zshrc ]]; then
+  rm ~/.zshrc
+fi
 
 # link new dot files
 ln ~/.dotfiles/git/gitconfig ~/.gitconfig
