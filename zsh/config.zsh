@@ -6,8 +6,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE="$HOME/.zsh_history"
 
-TERM='xterm-256color'
-
 # update PATH
 path=(
   $DOTFILES/bin

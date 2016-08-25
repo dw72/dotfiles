@@ -1,13 +1,12 @@
 DOTFILES=$HOME/.dotfiles
 ZSH=$DOTFILES/zsh
 
-export TERM="xterm-256color"
+TERM="xterm-256color"
 
 # ZPlug
 #-------------
 ZPLUG_HOME=$HOME/.zplug
 [[ -d ~/.zplug ]] || {
-  mkdir -p $ZPLUG_HOME
   git clone https://github.com/zplug/zplug $ZPLUG_HOME
   source $ZPLUG_HOME/init.zsh && zplug update --self
 }
