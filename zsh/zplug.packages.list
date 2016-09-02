@@ -2,11 +2,10 @@
 # -------------------------------------------------------------------------
 
 # manage zplug in the same way as any other packages
-zplug "zplug/zplug", frozen:1
+zplug "zplug/zplug"
 
 # use key bindings from oh-my-zsh
-# zplug "lib/directories", from:oh-my-zsh
-# zplug "lib/key-bindings", from:oh-my-zsh
+zplug "robbyrussell/oh-my-zsh", use:"lib/{directories.zsh,key-bindings.zsh}"
 
 # some oh-my-zsh plugins
 zplug "plugins/bower", from:oh-my-zsh, if:"(( $+commands[bower] ))", nice:10
