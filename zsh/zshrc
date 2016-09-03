@@ -14,7 +14,7 @@ ZPLUG_LOADFILE="$ZSH/zplug.packages.list"
 # Install zplug if not installed
 
 [[ -d $ZPLUG_HOME ]] || {
-	git clone -b fix-239 https://github.com/zplug/zplug $ZPLUG_HOME
+	git clone https://github.com/zplug/zplug $ZPLUG_HOME
 	source $ZPLUG_HOME/init.zsh && zplug update --self
 }
 
