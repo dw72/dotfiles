@@ -48,16 +48,16 @@ if zplug check bhilburn/powerlevel9k; then
   POWERLEVEL9K_HISTORY_FOREGROUND='252'
 fi
 
-if zplug check zsh-users/zsh-history-substring-search; then
+if zplug check "zsh-users/zsh-history-substring-search"; then
   # Add history-substring-search-* widgets to list of widgets that clear the autosuggestion
   ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down)
 fi
 
-if zplug check zsh-users/zsh-autosuggestions; then
+if zplug check "zsh-users/zsh-autosuggestions"; then
   bindkey '^ ' autosuggest-accept
 fi
 
-if zplug check Tarrasch/zsh-autoenv; then
+if zplug check "Tarrasch/zsh-autoenv"; then
   AUTOENV_FILE_ENTER=.env
   AUTOENV_FILE_LEAVE=.envl
 fi
