@@ -21,10 +21,11 @@ typeset -U path
 setopt AUTO_CD
 setopt NO_BG_NICE
 setopt NO_HUP
+#setopt IGNORE_EOF
 setopt NO_LIST_BEEP
 setopt LOCAL_OPTIONS
 setopt LOCAL_TRAPS
-#setopt IGNORE_EOF
+setopt NO_NOMATCH
 setopt PROMPT_SUBST
 setopt NO_MONITOR
 
