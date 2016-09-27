@@ -1,6 +1,7 @@
-EDITOR='vim'
-PAGER='less'
 BROWSER='chromium'
+EDITOR='vim'
+export PAGER="less"
+export LESS="-R"
 
 HISTSIZE=10000
 SAVEHIST=10000
