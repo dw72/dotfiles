@@ -19,6 +19,7 @@ zplug "plugins/gitignore", from:oh-my-zsh, if:"(( $+commands[git] ))", nice:10
 zplug "plugins/grunt", from:oh-my-zsh, if:"(( $+commands[grunt] ))", nice:10
 zplug "plugins/gulp", from:oh-my-zsh, if:"(( $+commands[gulp] ))", nice:10
 zplug "plugins/meteor", from:oh-my-zsh, if:"(( $+commands[meteor] ))"
+zplug "plugins/ssh-agent", from:oh-my-zsh
 zplug "plugins/sublime", from:oh-my-zsh, if:"(( $+commands[subl3] ))"
 zplug "plugins/sudo", from:oh-my-zsh
 

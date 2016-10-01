@@ -61,3 +61,12 @@ if zplug check "Tarrasch/zsh-autoenv"; then
   AUTOENV_FILE_ENTER=.env
   AUTOENV_FILE_LEAVE=.envl
 fi
+
+if zplug check "plugins/ssh-agent"; then
+	# Enable agent forwarding support
+	zstyle :omz:plugins:ssh-agent agent-forwarding on
+	# Load multiple identities
+	zstyle :omz:plugins:ssh-agent identities id_rsa id_ecdsa id_meat
+	# Set maximum lifetime of the identities (if not set lifetime is endless)
+	# zstyle :omz:plugins:ssh-agent lifetime 4h
+fi
