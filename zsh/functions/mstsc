@@ -1,0 +1,1 @@
+rdesktop -z -P -g 1200x710 -k pl -5 -r clipboard:CLIPBOARD -d LIBELT -u Administrator $@ 2>/dev/null &

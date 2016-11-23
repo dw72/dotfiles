@@ -9,8 +9,5 @@ alias imgren2date="exiftool -r '-FileName<CreateDate' -d '%Y-%m-%d %H.%M.%S%%-c.
 # check my external ip address
 alias checkip="dig +short myip.opendns.com @resolver1.opendns.com"
 
-# remote desktop
-alias mstsc="rdesktop -z -P -g 1200x710 -k pl -5 -r clipboard:CLIPBOARD -d LIBELT -u Administrator"
-
 # remove orphan packages
 alias pacaur-clean-orphans="pacaur -Rs $(pacaur -Qqdt)"
