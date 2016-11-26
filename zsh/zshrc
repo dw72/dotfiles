@@ -1,3 +1,5 @@
+DISTRO=$(cat /etc/issue | awk '{ print $1 }')
+
 DOTFILES=$HOME/.dotfiles
 ZSH=$DOTFILES/zsh
 
