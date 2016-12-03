@@ -13,3 +13,9 @@ if [ $DISTRO = 'Arch' ]; then
   # remove orphan packages
   alias pacaur-clean-orphans="pacaur -Rs $(pacaur -Qqdt)"
 fi
+
+# Docker cleanup https://www.calazan.com/docker-cleanup-commands/
+alias docker-killall='docker kill $(docker ps -q)'
+alias docker-clean-containers='printf "\n>>> Deleting stopped containers\n\n" && docker rm $(docker ps -a -q)'
+alias docker-clean-images='printf "\n>>> Deleting untagged images\n\n" && docker rmi $(docker images -q -f dangling=true)'
+alias docker-clean='docker-clean-containers || true && docker-clean-images'
