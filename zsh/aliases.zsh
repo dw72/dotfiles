@@ -1,5 +1,5 @@
 # ls color output
-ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty' || alias ls='ls -G'
+ls --color -d . &>/dev/null 2>&1 && alias ls='ls -h --color=tty' || alias ls='ls -hG'
 
 alias dd="dd status=progress"
 
