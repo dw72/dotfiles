@@ -19,3 +19,6 @@ alias docker-killall='docker kill $(docker ps -q)'
 alias docker-clean-containers='printf "\n>>> Deleting stopped containers\n\n" && docker rm $(docker ps -a -q)'
 alias docker-clean-images='printf "\n>>> Deleting untagged images\n\n" && docker rmi $(docker images -q -f dangling=true)'
 alias docker-clean='docker-clean-containers || true && docker-clean-images'
+
+# kill gnome-shell
+alias gskill="kill -9 $(ps u | grep gnome-shell | head -1 | awk '{print $2}')"
