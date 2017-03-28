@@ -5,8 +5,16 @@ ZSH=$DOTFILES/zsh
 
 TERM="xterm-256color"
 
+
+# https://gnunn1.github.io/tilix-web/manual/vteconfig/
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
+fi
+
+
 # source all .zsh files inside of the zsh/ subdirectory
 for config ($ZSH/**/*.zsh) source $config
+
 
 # ZPlug
 #-------------
