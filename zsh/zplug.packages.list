@@ -2,7 +2,7 @@
 # -------------------------------------------------------------------------
 
 # manage zplug like any other packages
-zplug "zplug/zplug"
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # use key bindings from oh-my-zsh
 zplug "lib/directories", from:"oh-my-zsh"
