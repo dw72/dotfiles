@@ -28,8 +28,8 @@ zplug "lukechilds/zsh-better-npm-completion", defer:2
 
 zplug "Tarrasch/zsh-autoenv"
 
-zplug "lukechilds/zsh-nvm"
-zplug "Sparragus/zsh-auto-nvm-use"
+#zplug "lukechilds/zsh-nvm"
+#zplug "Sparragus/zsh-auto-nvm-use"
 
 zplug "dw72/80e6a7962f4ae401df0461172d27b74c", from:gist, as:command, use:"convert2mp3.sh", rename-to:"convert2mp3", if:"(( $+commands[ffmpeg] ))"
 zplug "dw72/7de9c29c9ce3d90462daa43de75450e5", from:gist, as:command, use:"zsp2vpn.sh", rename-to:"zsp2vpn", if:"(( $+commands[vpnc] ))"
