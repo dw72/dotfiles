@@ -1,16 +1,38 @@
-NODENV_HOME=$HOME/.nodenv
-NODENV_PLUGINS=$HOME/.nodenv/plugins
+NODENV_ROOT=$HOME/.nodenv
 
-[[ -d $NODENV_HOME ]] || {
-	git clone --depth 1 https://github.com/nodenv/nodenv.git $NODENV_HOME
+NODENV_PLUGINS=(
+  node-build
+  nodenv-update
+  nodenv-each
+  nodenv-package-rehash
+  nodenv-npm-migrate
+)
+# nodenv-default-packages
+
+NODEENV_DEFAULT_PACKAGES="grunt-cli gulp-cli yarn yo"
+
+
+[[ -d $NODENV_ROOT ]] || {
+	git clone --depth 1 https://github.com/nodenv/nodenv.git $NODENV_ROOT
 }
 
-[[ -d $NODENV_PLUGINS/node-build ]] || {
-  git clone --depth 1 https://github.com/nodenv/node-build.git $NODENV_PLUGINS/node-build
-}
-[[ -d $NODENV_PLUGINS/nodenv-update ]] || {
-  git clone --depth 1 https://github.com/nodenv/nodenv-update.git $NODENV_PLUGINS/nodenv-update
-}
-
-export PATH="$NODENV_HOME/bin:$PATH"
+export PATH="$NODENV_ROOT/bin:$PATH"
 eval "$(nodenv init --no-rehash -)"
+
+
+for PLUGIN in $NODENV_PLUGINS; do
+  [[ -d $NODENV_ROOT/plugins/$PLUGIN ]] || {
+    git clone --depth 1 https://github.com/nodenv/$PLUGIN.git $NODENV_ROOT/plugins/$PLUGIN
+  }
+
+  case $PLUGIN in
+    nodenv-default-packages)
+      echo $NODEENV_DEFAULT_PACKAGES | tr ' ' '\n' > $NODENV_ROOT/default-packages
+      ;;
+    nodenv-package-rehash)
+      nodenv package-hooks install --all
+      ;;
+  esac
+done
+
+unset NODENV_PLUGINS NODEENV_DEFAULT_PACKAGES
