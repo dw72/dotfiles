@@ -17,7 +17,6 @@ zplug "plugins/docker-compose", from:oh-my-zsh, if:"(( $+commands[docker-compose
 zplug "plugins/extract", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh, if:"(( $+commands[git] ))", defer:2
 zplug "plugins/gitignore", from:oh-my-zsh, on:plugins/git, defer:2
-zplug "plugins/sublime", from:oh-my-zsh, if:"(( $+commands[subl3] ))"
 zplug "plugins/sudo", from:oh-my-zsh
 
 # other plugins
