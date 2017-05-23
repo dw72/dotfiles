@@ -66,4 +66,4 @@ if zplug check "Tarrasch/zsh-autoenv"; then
   AUTOENV_FILE_LEAVE=.envl
 fi
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$ZPLUG_BIN:$PATH"

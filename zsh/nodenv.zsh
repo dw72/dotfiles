@@ -6,6 +6,7 @@ NODENV_PLUGINS=(
   nodenv-each
   nodenv-package-rehash
   nodenv-npm-migrate
+  node-build-update-defs
 )
 # nodenv-default-packages
 
