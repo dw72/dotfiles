@@ -1,5 +1,6 @@
-BROWSER='chromium'
-EDITOR='vim'
+export BROWSER='chromium'
+export EDITOR='vi'
+
 export PAGER="less"
 export LESS="-R"
 
