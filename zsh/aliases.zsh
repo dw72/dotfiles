@@ -4,7 +4,7 @@ ls --color -d . &>/dev/null 2>&1 && alias ls='ls -h --color=tty' || alias ls='ls
 alias dd="dd status=progress"
 
 # photo rename
-alias imgren2date="exiftool -r '-FileName<CreateDate' -d '%Y-%m-%d %H.%M.%S%%-c.%%le'"
+alias exif2name="exiftool -r '-FileName<CreateDate' -d '%Y-%m-%d %H.%M.%S%%-c.%%le'"
 
 # check my external ip address
 alias checkip="dig +short myip.opendns.com @resolver1.opendns.com"
