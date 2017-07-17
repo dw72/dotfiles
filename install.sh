@@ -12,7 +12,12 @@ fi
 if [[ -f $HOME/.zshrc ]]; then
   rm ~/.zshrc
 fi
+if [[ -f $HOME/.config/nvim/init.vim ]]; then
+  rm ~/.config/nvim/init.vim
+fi
 
 # link new dot files
+mkdir -p ~/.config/nvim
+ln -s ~/.dotfiles/vim/vimrc ~/.config/nvim/init.vim
 ln -s ~/.dotfiles/git/gitconfig ~/.gitconfig
 ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc

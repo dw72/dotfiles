@@ -1,0 +1,29 @@
+set number
+set ruler
+
+set background=dark
+set termguicolors
+
+set list
+set listchars=tab:•\ ,trail:•,extends:»,precedes:«
+
+autocmd BufWritePre * :%s/\s\+$//e
+
+set
+  \ noswapfile
+  \ nobackup
+  \ nowritebackup
+
+set expandtab
+set smartindent
+
+set
+  \ tabstop=2
+  \ softtabstop=2
+  \ shiftwidth=2
+
+set cursorline
+
+set nowrap
+
+set clipboard+=unnamedplus
