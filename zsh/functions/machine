@@ -1,9 +1,9 @@
 function usage {
-	echo "Usage: $0 name {start|stop|rm}"
+	echo "Usage: $1 name {start|stop|rm}"
 }
 
 if [ -z $1 ]; then
-	usage
+	usage $0
 	return
 fi
 
@@ -28,6 +28,6 @@ case "$2" in
 		$CMD ps
 		;;
 	*)
-		usage
+		usage $0
 		;;
 esac
