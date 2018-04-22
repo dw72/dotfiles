@@ -1,0 +1,33 @@
+function usage {
+	echo "Usage: $0 name {start|stop|rm}"
+}
+
+if [ -z $1 ]; then
+	usage
+	return
+fi
+
+if [ ! -d ~/.dotfiles/docker/$1 ]; then
+	echo "There is no config for machine named '$1' in ~/.dotfiles/docker"
+	return
+fi
+
+CMD=(docker-compose -f ~/.dotfiles/docker/$1/docker-compose.yml)
+
+case "$2" in
+	"start")
+		$CMD up -d
+		;;
+	"stop")
+		$CMD stop
+		;;
+	"rm")
+		$CMD rm
+		;;
+	"status")
+		$CMD ps
+		;;
+	*)
+		usage
+		;;
+esac
